@@ -1,0 +1,16 @@
+version: '3.7'
+services:
+  docker-notifier:
+    image: reg2005/docker-notifier:latest
+    environment:
+      - TELEGRAM_URL=https://api.telegram.org/bot${botToken}/sendMessage
+      - TELEGRAM_CHANNEL_ID=-12345
+      - SLACK_URL=https://hooks.slack.com/services/ANC/ABC/ABCDDEF
+      - SLACK_CHANNEL=#swarm-cluster-docker-events
+      - SLACK_USERNAME=webhookbot
+      - SLACK_ICON_EMOJI=':ghost:'
+      # - https_proxy=http://yourproxy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    logging:
+      driver: json-file
